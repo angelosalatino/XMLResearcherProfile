@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE researcherProfile SYSTEM "rpDTD.dtd">
+
+<researcherProfile>
+    <person>
+        <name>Researcher's Name</name>
+        <affiliations>
+            <affiliation id="1">Affiliation 1</affiliation>
+            <affiliation id="2">Affiliation 2</affiliation>
+        </affiliations>
+    </person>
+
+<publications>
+    <!-- INPROCEEDINGS EXAMPLE -->
+    <publication type="inproceedings" affiliationid="" key="" mdate="yyyy-mm-dd">
+        <author>Author 1</author>
+        <author>Author 2</author>
+        <author>Author 3</author>
+        <title>Publiocation Title</title>
+        <pages>185-198</pages>
+        <year>yyyy</year>
+        <booktitle></booktitle>
+        <ee>http://dx.doi.org/00.0000/000-0-0-000-00000-0_00</ee>
+        <crossref>conf</crossref>
+        <url></url>
+        <source></source>
+        <googlescholar></googlescholar>
+        <post></post>
+    </publication>
+
+
+    
+    <!-- ARTICLE EXAMPLE -->
+    <publication type="article" affiliationid=""  key="" mdate="yyyy-mm-dd">
+        <author>Author 1</author>
+        <author>Author 2</author>
+        <author>Author 3</author>
+        <title>Publiocation Title</title>
+        <pages>3615-3627</pages>
+        <year>yyyy</year>
+        <volume>00</volume>
+        <journal></journal>
+        <number></number>
+        <ee>http://dx.doi.org/00.0000/0000.0000.0000000</ee>
+        <url></url>
+        <source></source>
+        <googlescholar></googlescholar>
+        <post></post>
+    </publication>
+    
+</publications>
+
+</researcherProfile>
