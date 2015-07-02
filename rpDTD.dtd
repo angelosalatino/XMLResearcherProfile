@@ -17,7 +17,7 @@ and open the template in the editor.
 
 
 <!ELEMENT publications (publication)*>
-<!ENTITY % field "author|editor|title|booktitle|pages|year|address|journal|volume|number|month|url|ee|cdrom|cite|publisher|note|crossref|isbn|series|school|chapter|source|googlescholar|post">
+<!ENTITY % field "author|editor|title|booktitle|pages|year|address|journal|volume|number|month|ee|cdrom|cite|publisher|note|isbn|series|school|chapter|source|googlescholar|post">
 
 <!ELEMENT publication       (%field;)*>
 <!ATTLIST publication
@@ -48,7 +48,6 @@ and open the template in the editor.
 <!ELEMENT volume    (#PCDATA)>
 <!ELEMENT number    (#PCDATA)>
 <!ELEMENT month     (#PCDATA)>
-<!ELEMENT url       (#PCDATA)>
 <!ELEMENT ee        (#PCDATA)>
 <!ELEMENT cite      (#PCDATA)>
 <!ELEMENT school    (#PCDATA)>
@@ -64,7 +63,6 @@ and open the template in the editor.
 <!ATTLIST cite
                     label CDATA #IMPLIED
 >
-<!ELEMENT crossref  (#PCDATA)>
 <!ELEMENT isbn      (#PCDATA)>
 <!ELEMENT chapter   (#PCDATA)>
 <!ELEMENT source    (#PCDATA)>

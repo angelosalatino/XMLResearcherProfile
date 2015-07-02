@@ -26,8 +26,6 @@ and open the template in the editor.
         <year>yyyy</year>
         <booktitle></booktitle>
         <ee>http://dx.doi.org/00.0000/000-0-0-000-00000-0_00</ee>
-        <crossref>conf</crossref>
-        <url></url>
         <source></source>
         <googlescholar></googlescholar>
         <post></post>
@@ -47,7 +45,6 @@ and open the template in the editor.
         <journal></journal>
         <number></number>
         <ee>http://dx.doi.org/00.0000/0000.0000.0000000</ee>
-        <url></url>
         <source></source>
         <googlescholar></googlescholar>
         <post></post>
