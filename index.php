@@ -56,7 +56,7 @@ function printPublications(){
     <head>
         <meta charset="UTF-8">
         <title></title>
-        <link rel='stylesheet' type='text/css' href='xmlReferences.css' />
+        <link rel='stylesheet' type='text/css' href='myCss.css' />
     </head>
     <body>
         <?php printPublications();  ?>
