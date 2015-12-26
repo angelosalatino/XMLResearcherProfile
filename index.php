@@ -32,10 +32,8 @@ and open the template in the editor.
                 . '<p>'.$lastYear.'</p><ul>';
             }
             echo '<li><div class= "publication">'
-                . '<p>'
-                . '<strong>'.implode(", ", (array)$publication->author)
-                //. '('.$publication->year.')'
-                . '</strong>';
+                . '<p>' //open new publication view
+                . '<strong>'.implode(", ", (array)$publication->author). '</strong>';
             echo ' <a href="'.$publication->post.'" target="_blank">'.$publication->title.'</a>.';
             
             if(!empty($publication->booktitle)) {echo ' In <i>'.$publication->booktitle.'</i>,';}
