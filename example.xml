@@ -17,7 +17,7 @@ and open the template in the editor.
 
 <publications>
     <!-- INPROCEEDINGS EXAMPLE -->
-    <publication type="inproceedings" affiliationid="" key="" mdate="yyyy-mm-dd">
+    <publication type="inproceedings" affiliationid="" year="2010" key="" mdate="yyyy-mm-dd">
         <author>Author 1</author>
         <author>Author 2</author>
         <author>Author 3</author>
@@ -34,7 +34,7 @@ and open the template in the editor.
 
     
     <!-- ARTICLE EXAMPLE -->
-    <publication type="article" affiliationid=""  key="" mdate="yyyy-mm-dd">
+    <publication type="article" affiliationid="" year="2010"  key="" mdate="yyyy-mm-dd">
         <author>Author 1</author>
         <author>Author 2</author>
         <author>Author 3</author>
@@ -49,7 +49,6 @@ and open the template in the editor.
         <googlescholar></googlescholar>
         <post></post>
     </publication>
-    
 </publications>
 
 </researcherProfile>
