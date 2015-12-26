@@ -1,0 +1,24 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 26-Dec-2015, 16:55:28
+    Author     : Angelo
+*/
+
+#PublicationList{
+    width: 800px;
+    text-align: justify;
+}
+
+.year p{
+   margin-top: 10px;
+   margin-bottom: 10px;
+   font-weight: bold;
+}
+
+.publication p{
+    font-weight: normal;
+}
