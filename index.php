@@ -40,10 +40,11 @@ function printPublications(){
             if(!empty($publication->pages)){ echo ' pp. '.$publication->pages.'.';}
             if(!empty($publication->publisher)) {echo ' '.$publication->publisher.', ';}
             echo ' '.$publication->year;
-            if(!empty($publication->source)){echo ' <a href="'.$publication->source.'" target="_blank"><img src="images/pdf.gif" title="Download PDF File"/></a>';}
-            if(!empty($publication->oro)){echo ' <a href="'.$publication->oro.'" target="_blank"><img src="images/oro.png" title="Open Research Online (ORO) Link"/></a>';}
-            if(!empty($publication->website)){echo ' <a href="'.$publication->website.'" target="_blank"><img src="images/website.png" title="Visit External Website"/></a>';}
-            if(!empty($publication->ee)){echo ' <a href="'.$publication->ee.'" target="_blank"><img src="images/doi.gif" title="DOI | Digital Object Identifier"/></a>';}
+            if(!empty($publication->source)){echo ' <a href="'.$publication->source.'" target="_blank"><img src="images/pdf2.png" title="Download PDF File"/></a>';}
+            if(!empty($publication->oro)){echo ' <a href="'.$publication->oro.'" target="_blank"><img src="images/oro2.png" title="Open Research Online (ORO) Link"/></a>';}
+            if(!empty($publication->website)){echo ' <a href="'.$publication->website.'" target="_blank"><img src="images/website2.png" title="Visit External Website"/></a>';}
+            if(!empty($publication->ee)){echo ' <a href="'.$publication->ee.'" target="_blank"><img src="images/doi.png" title="DOI | Digital Object Identifier"/></a>';}
+            if(!empty($publication->rash)){echo ' <a href="'.$publication->rash.'" target="_blank"><img src="images/rash.png" title="RASH | Research Articles in Simplified HTML"/></a>';}
             echo '</p>'
                 . '</div></li>';
         }
