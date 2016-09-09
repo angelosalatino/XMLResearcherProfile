@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified">
+    
+    <xs:element name="researcherProfile" type="researcherProfile"/>
+    <xs:complexType name="researcherProfile">
+        <xs:sequence>
+            <xs:element name="person" type="person" maxOccurs="1"/>
+            <xs:element name="publications" type="publications" minOccurs="0" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="person">      
+        <xs:sequence maxOccurs="1">
+            <xs:element name="name" type="xs:string" maxOccurs="1"/>
+            <xs:element name="affiliations" type="affiliations" maxOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="affiliations">      
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="affiliation" type="affiliation" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="affiliation">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:string" use="required" />
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    
+    
+    <xs:complexType name="publications">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="publication" type="publication" maxOccurs="unbounded"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="publication">      
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="address" type="xs:string" minOccurs="0"/>
+            <xs:element name="author" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="booktitle" type="xs:string" minOccurs="0"/>
+            <xs:element name="cite" type="cite" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="crossref" type="xs:string" minOccurs="0"/>
+            <xs:element name="editor" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ee" type="xs:string" minOccurs="0"/>
+            <xs:element name="isbn" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="journal" type="xs:string" minOccurs="0"/>
+            <xs:element name="month" type="xs:string" minOccurs="0"/>
+            <xs:element name="note" type="xs:string" minOccurs="0"/>
+            <xs:element name="number" type="xs:string" minOccurs="0"/>
+            <xs:element name="publisher" type="publisher" minOccurs="0"/>
+            <xs:element name="series" type="series" minOccurs="0"/>
+            <xs:element name="title" type="title" maxOccurs="unbounded"/>
+            <xs:element name="url" type="xs:string" minOccurs="0"/>
+            <xs:element name="volume" type="xs:string" minOccurs="0"/>
+            <xs:element name="year" type="xs:string"/>
+            <xs:element name="pages" type="xs:string"/>
+            <xs:element name="source" type="xs:string"/>
+            <xs:element name="googlescholar" type="xs:string"/>
+            <xs:element name="post" type="xs:string"/>
+            <xs:element name="website" type="xs:string"/>
+            <xs:element name="oro" type="xs:string"/>
+            <xs:element name="rash" type="xs:string"/>
+        </xs:choice>
+        <xs:attribute name="type" type="type_pub" use="required"/> 
+        <xs:attribute name="affiliationid" type="xs:string" use="required"/> 
+        <xs:attribute name="year" type="xs:string" use="required"/>
+        <xs:attribute name="key" type="xs:string" use="required"/>
+        <xs:attribute name="mdate" type="xs:string" use="required"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="type_pub">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="inproceedings" />
+            <xs:enumeration value="article" />
+            <xs:enumeration value="phdthesis" />
+            <!-- <xs:enumeration value="book" />-->
+            <!-- <xs:enumeration value="incollection" /> -->
+            <!-- <xs:enumeration value="mastersthesis" /> -->
+            <!-- <xs:enumeration value="www" />-->
+        </xs:restriction>
+    </xs:simpleType>
+
+    
+    <!-- -->   
+    
+    <xs:complexType name="cite">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="label" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="title" mixed="true">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="i" type="i" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sub" type="sub" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sup" type="sup" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="tt" type="xs:string" minOccurs="0"/>
+        </xs:choice>
+    </xs:complexType>
+    
+    <xs:complexType name="series">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="href" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    
+    <xs:complexType name="sup" mixed="true">
+        <xs:sequence>
+            <xs:element name="i" type="xs:string" minOccurs="0"/>
+            <xs:element name="sub" type="xs:string" minOccurs="0"/>
+            <xs:element name="sup" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="sub" mixed="true">
+        <xs:sequence>
+            <xs:element name="i" type="xs:string" minOccurs="0"/>
+            <xs:element name="sub" type="xs:string" minOccurs="0"/>
+            <xs:element name="sup" type="sup" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="i" mixed="true">
+        <xs:sequence>
+            <xs:element name="sub" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="sup" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <xs:complexType name="publisher">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="href" type="xs:string"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+
+
+</xs:schema>
