@@ -109,7 +109,7 @@ function checkGraph($xmlfile, $graphfile) {
 }
 
 function createGraph($xmlfile, $graphfile) {
-    echo "Creating file $graphfile now!!!<br />";
+//    echo "Creating file $graphfile now!!!<br />";
     $xml = simplexml_load_file($xmlfile) or die("Error: Cannot create object");
 
     // loading authors

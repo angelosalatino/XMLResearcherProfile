@@ -87,6 +87,7 @@ and open the template in the editor.
             <xs:enumeration value="inproceedings" />
             <xs:enumeration value="article" />
             <xs:enumeration value="phdthesis" />
+            <xs:enumeration value="poster" />
             <!-- <xs:enumeration value="book" />-->
             <!-- <xs:enumeration value="incollection" /> -->
             <!-- <xs:enumeration value="mastersthesis" /> -->

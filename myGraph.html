@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Co-Authorship Graph</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <!-- START SIGMA IMPORTS -->
+<script src="./graph/src/sigma.core.js"></script>
+<script src="./graph/src/conrad.js"></script>
+<script src="./graph/src/utils/sigma.utils.js"></script>
+<script src="./graph/src/utils/sigma.polyfills.js"></script>
+<script src="./graph/src/sigma.settings.js"></script>
+<script src="./graph/src/classes/sigma.classes.dispatcher.js"></script>
+<script src="./graph/src/classes/sigma.classes.configurable.js"></script>
+<script src="./graph/src/classes/sigma.classes.graph.js"></script>
+<script src="./graph/src/classes/sigma.classes.camera.js"></script>
+<script src="./graph/src/classes/sigma.classes.quad.js"></script>
+<script src="./graph/src/classes/sigma.classes.edgequad.js"></script>
+<script src="./graph/src/captors/sigma.captors.mouse.js"></script>
+<script src="./graph/src/captors/sigma.captors.touch.js"></script>
+<script src="./graph/src/renderers/sigma.renderers.canvas.js"></script>
+<script src="./graph/src/renderers/sigma.renderers.webgl.js"></script>
+<script src="./graph/src/renderers/sigma.renderers.svg.js"></script>
+<script src="./graph/src/renderers/sigma.renderers.def.js"></script>
+<script src="./graph/src/renderers/webgl/sigma.webgl.nodes.def.js"></script>
+<script src="./graph/src/renderers/webgl/sigma.webgl.nodes.fast.js"></script>
+<script src="./graph/src/renderers/webgl/sigma.webgl.edges.def.js"></script>
+<script src="./graph/src/renderers/webgl/sigma.webgl.edges.fast.js"></script>
+<script src="./graph/src/renderers/webgl/sigma.webgl.edges.arrow.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.labels.def.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.hovers.def.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.nodes.def.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edges.def.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edges.curve.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edges.arrow.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edges.curvedArrow.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edgehovers.def.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edgehovers.curve.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edgehovers.arrow.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.edgehovers.curvedArrow.js"></script>
+<script src="./graph/src/renderers/canvas/sigma.canvas.extremities.def.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.utils.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.nodes.def.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.edges.def.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.edges.curve.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.labels.def.js"></script>
+<script src="./graph/src/renderers/svg/sigma.svg.hovers.def.js"></script>
+<script src="./graph/src/middlewares/sigma.middlewares.rescale.js"></script>
+<script src="./graph/src/middlewares/sigma.middlewares.copy.js"></script>
+<script src="./graph/src/misc/sigma.misc.animation.js"></script>
+<script src="./graph/src/misc/sigma.misc.bindEvents.js"></script>
+<script src="./graph/src/misc/sigma.misc.bindDOMEvents.js"></script>
+<script src="./graph/src/misc/sigma.misc.drawHovers.js"></script>
+<!-- END SIGMA IMPORTS -->
+<script src="./graph/plugins/sigma.plugins.neighborhoods/sigma.plugins.neighborhoods.js"></script>
+        <script src="./graph/plugins/sigma.layout.forceAtlas2/supervisor.js"></script>
+        <script src="./graph/plugins/sigma.layout.forceAtlas2/worker.js"></script>
+        <script src="./graph/lib/jquery-2.1.1.min.js"></script>
+        <script src="./graph/plugins/sigma.parsers.json/sigma.parsers.json.js"></script>
+        <script src="./graph/plugins/sigma.plugins.dragNodes/sigma.plugins.dragNodes.js"></script>
+        <script src="./graph/src/misc/sigma.misc.drawHovers.js"></script>
+        <script src="./graph/plugins/sigma.renderers.edgeLabels/settings.js"></script>
+        <script src="./graph/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.def.js"></script>
+        <script src="./graph/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curve.js"></script>
+        <script src="./graph/plugins/sigma.renderers.edgeLabels/sigma.canvas.edges.labels.curvedArrow.js"></script>
+        <div id="container">
+            <style>
+                #graph-container {
+                    top: 0;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    position: absolute;
+                    background-color: #fff;
+                }
+            </style>
+            <div id="graph-container"></div>
+        </div>
+<script>
+/**
+ * This example copies basic.html, but with the sigma container somewhere in a
+ * page such that the user has to scroll to manipulate it. This example is here
+ * to facilitate testing sigma integration in real-life web pages.
+ */
+var i,
+    s,
+    N = 100,
+    E = 500,
+    g = {
+      nodes: [],
+      edges: []
+    };
+
+// Generate a random graph:
+for (i = 0; i < N; i++)
+  g.nodes.push({
+    id: 'n' + i,
+    label: 'Node ' + i,
+    x: Math.random(),
+    y: Math.random(),
+    size: Math.random(),
+    color: '#666'
+  });
+
+for (i = 0; i < E; i++)
+  g.edges.push({
+    id: 'e' + i,
+    source: 'n' + (Math.random() * N | 0),
+    target: 'n' + (Math.random() * N | 0),
+    size: Math.random(),
+    color: '#ccc'
+  });
+
+// Instantiate sigma:
+sigma.classes.graph.addMethod('neighbors', function (nodeId) {
+                var k,
+                        neighbors = {},
+                        index = this.allNeighborsIndex[nodeId] || {};
+
+                for (k in index)
+                    neighbors[k] = this.nodesIndex[k];
+
+                return neighbors;
+            });
+
+            sigma.parsers.json(
+                    'myCoauth.json',
+                    {
+                        renderer: {
+                            // IMPORTANT:
+                            // This works only with the canvas renderer, so the
+                            // renderer type set as "canvas" is necessary here.
+                            container: document.getElementById('graph-container'),
+                            type: 'canvas'
+                        },
+                        settings: {
+                            defaultNodeColor: '#06c',
+                            labelThreshold: 1,
+                            labelSize: 'proportional',
+                            labelSizeRatio: 5,
+                            enableEdgeHovering: true,
+                            edgeHoverColor: '#06c',
+                            defaultEdgeHoverColor: '#06c',
+                            edgeHoverSizeRatio: 1,
+                            edgeHoverExtremities: true,
+                        }
+                    },
+            function (s) {
+
+                // Start the ForceAtlas2 algorithm:
+                s.startForceAtlas2({worker: true, barnesHutOptimize: false, });
+                setTimeout(function () {
+                    s.stopForceAtlas2();
+                }, 5000);
+                
+                // We first need to save the original colors of our
+                // nodes and edges, like this:
+                s.graph.nodes().forEach(function (n) {
+                    n.originalColor = n.color;
+                });
+                s.graph.edges().forEach(function (e) {
+                    e.originalColor = e.color;
+                });
+
+                // When a node is clicked, we check for each node
+                // if it is a neighbor of the clicked one. If not,
+                // we set its color as grey, and else, it takes its
+                // original color.
+                // We do the same for the edges, and we only keep
+                // edges that have both extremities colored.
+                s.bind('clickNode', function (e) {
+
+                    var nodeId = e.data.node.id,
+                            toKeep = s.graph.neighbors(nodeId);
+                    toKeep[nodeId] = e.data.node;
+
+                    s.graph.nodes().forEach(function (n) {
+                        if (toKeep[n.id])
+                            n.color = n.originalColor;
+                        //n.color = n.originalColor;
+                        else
+                            n.color = 'rgba(0,102,204,1)';
+                        //n.color = '#eee';
+                    });
+
+                    s.graph.edges().forEach(function (e) {
+                        if (toKeep[e.source] && toKeep[e.target])
+                            e.color = '#06c';//e.originalColor;//"rgba(0,102,204,1)";//
+                        //e.color = '#06c';//e.originalColor;//"rgba(0,102,204,1)";//
+                        else
+                            e.color = 'rgba(238,238,238,0.5)';
+                        //e.color = "rgba(255,255,255,0)";
+                    });
+
+                    // Since the data has been modified, we need to
+                    // call the refresh method to make the colors
+                    // update effective.
+                    s.refresh();
+                });
+
+                // When the stage is clicked, we just color each
+                // node and edge with its original color.
+                s.bind('clickStage', function (e) {
+                    s.graph.nodes().forEach(function (n) {
+                        n.color = n.originalColor;
+                    });
+
+                    s.graph.edges().forEach(function (e) {
+                        e.color = e.originalColor;
+                    });
+
+                    // Same as in the previous event:
+                    s.refresh();
+                });
+
+                // Initialize the dragNodes plugin:
+                var dragListener = sigma.plugins.dragNodes(s, s.renderers[0]);
+
+                dragListener.bind('startdrag', function (event) {
+                    console.log(event);
+                });
+                dragListener.bind('drag', function (event) {
+                    console.log(event);
+                });
+                dragListener.bind('drop', function (event) {
+                    console.log(event);
+                });
+                dragListener.bind('dragend', function (event) {
+                    console.log(event);
+                });
+
+                // Bind the events:
+                s.bind('overNode outNode clickNode doubleClickNode rightClickNode', function (e) {
+                    console.log(e.type, e.data.node.label, e.data.captor);
+                });
+                s.bind('overEdge outEdge clickEdge doubleClickEdge rightClickEdge', function (e) {
+                    console.log(e.type, e.data.edge, e.data.captor);
+                });
+                s.bind('clickStage', function (e) {
+                    console.log(e.type, e.data.captor);
+                });
+                s.bind('doubleClickStage rightClickStage', function (e) {
+                    console.log(e.type, e.data.captor);
+                });
+
+
+
+            }
+            );
+</script>
+
+    </body>
+</html>
