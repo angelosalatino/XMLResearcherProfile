@@ -64,16 +64,15 @@ and open the template in the editor.
             <xs:element name="publisher" type="publisher" minOccurs="0"/>
             <xs:element name="series" type="series" minOccurs="0"/>
             <xs:element name="title" type="title" maxOccurs="unbounded"/>
-            <xs:element name="url" type="xs:string" minOccurs="0"/>
             <xs:element name="volume" type="xs:string" minOccurs="0"/>
-            <xs:element name="year" type="xs:string"/>
-            <xs:element name="pages" type="xs:string"/>
-            <xs:element name="source" type="xs:string"/>
-            <xs:element name="googlescholar" type="xs:string"/>
-            <xs:element name="post" type="xs:string"/>
-            <xs:element name="website" type="xs:string"/>
-            <xs:element name="oro" type="xs:string"/>
-            <xs:element name="rash" type="xs:string"/>
+            <xs:element name="year" type="xs:string" minOccurs="0"/>
+            <xs:element name="pages" type="xs:string" minOccurs="0"/>
+            <xs:element name="source" type="xs:string" minOccurs="0"/>
+            <xs:element name="googlescholar" type="xs:string" minOccurs="0"/>
+            <xs:element name="post" type="xs:string" minOccurs="0"/>
+            <xs:element name="website" type="xs:string" minOccurs="0"/>
+            <xs:element name="oro" type="xs:string" minOccurs="0"/>
+            <xs:element name="rash" type="xs:string" minOccurs="0"/>
         </xs:choice>
         <xs:attribute name="type" type="type_pub" use="required"/> 
         <xs:attribute name="affiliationid" type="xs:string" use="required"/> 
